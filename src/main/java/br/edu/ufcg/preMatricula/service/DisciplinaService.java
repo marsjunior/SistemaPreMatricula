@@ -20,7 +20,7 @@ public class DisciplinaService {
 		return DisciplinaRepository.findAll();
 	}
 
-	public DisciplinaNote getById(Long id) {
+	public DisciplinaNote getById(String id) {
 		Optional<DisciplinaNote> optTodo = DisciplinaRepository.findById(id);
 
 		if (!optTodo.isPresent()) {
@@ -35,7 +35,7 @@ public class DisciplinaService {
 		return todo;
 	}
 
-	public DisciplinaNote update(DisciplinaNote disciplina, Long id) {
+	public DisciplinaNote update(DisciplinaNote disciplina, String id) {
 		Optional<DisciplinaNote> optDisciplina = DisciplinaRepository.findById(id);
 
 		if (!optDisciplina.isPresent()) {
@@ -55,7 +55,7 @@ public class DisciplinaService {
 		return newDisciplina;
 	}
 
-	public DisciplinaNote delete(Long id) {
+	public DisciplinaNote delete(String id) {
 		Optional<DisciplinaNote> optTodo = DisciplinaRepository.findById(id);
 
 		if (!optTodo.isPresent()) {
@@ -66,6 +66,11 @@ public class DisciplinaService {
 		DisciplinaRepository.delete(todo);
 
 		return todo;
+	}
+	
+	public List<DisciplinaNote> getDisciplinaCodigo(String codigo){
+		List<DisciplinaNote> opt = DisciplinaRepository.findCodigoDisciplina(codigo);
+		return opt;
 	}
 	
 	
