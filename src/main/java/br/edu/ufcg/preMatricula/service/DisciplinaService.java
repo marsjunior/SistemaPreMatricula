@@ -44,7 +44,6 @@ public class DisciplinaService {
 
 		DisciplinaNote newDisciplina = optDisciplina.get();
 		newDisciplina.setNome(disciplina.getNome());
-		newDisciplina.setCodigo(disciplina.getCodigo());
 		newDisciplina.setCreditos(disciplina.getCreditos());
 		newDisciplina.setPeriodo(disciplina.getPeriodo());
 		newDisciplina.setGrade(disciplina.getGrade());
@@ -66,12 +65,6 @@ public class DisciplinaService {
 		DisciplinaRepository.delete(todo);
 
 		return todo;
-	}
-	
-	public List<DisciplinaNote> getDisciplinaCodigo(String codigo){
-		List<DisciplinaNote> opt = DisciplinaRepository.findCodigoDisciplina(codigo);
-		return opt;
-	}
-	
+	}	
 	
 }

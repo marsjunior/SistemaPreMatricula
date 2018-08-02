@@ -30,6 +30,15 @@ public class UsuarioService {
 		return usuario;
 	}
 	
+	public UsuarioNote getUsuarioId(String id){
+		Optional<UsuarioNote> optTodo = usuarioRepository.findById(id);
+		if (!optTodo.isPresent()) {
+			throw new RegisterNotFoundException("Todo don't exists");
+		}
+		UsuarioNote todo = optTodo.get();
+		return todo;
+	}
+	
 	public UsuarioNote delete(String id) {
 		Optional<UsuarioNote> optTodo = usuarioRepository.findById(id);
 

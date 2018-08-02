@@ -1,31 +1,44 @@
 package br.edu.ufcg.preMatricula.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "usuarios")
-
-public class UsuarioNote {
+public class UsuarioNote implements Serializable{
+	private static final long serialVersionUID = 1l;
 	
 	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	
-	@Column(name = "nome")
-	private String nome;
-	
-	@Column(name = "email")
-	private String email;
-	
+	@NotNull(message = "A matricula não pode ser nulo.")
+	@NotEmpty(message = "A matricula não pode ser vazio.")
 	@Column(name = "matricula")
 	private String matricula;
 	
+	@Column(name = "nome")
+	@NotNull(message = "O nome não pode ser nulo.")
+	@NotEmpty(message = "O nome não pode ser vazio.")
+	private String nome;
+	
+	@NotNull(message = "O email não pode ser nulo.")
+	@NotEmpty(message = "O email não pode ser vazio.")
+	@Column(name = "email")
+	private String email;
+	
+	@NotNull(message = "O anoIngresso não pode ser nulo.")
+	@NotEmpty(message = "O anoIngresso não pode ser vazio.")
+	@Column(name = "anoIngresso")
+	private String anoIngresso;
+	
+	@NotNull(message = "A grade não pode ser nulo.")
+	@NotEmpty(message = "A grade não pode ser vazio.")
 	@Column(name = "grade")
 	private String grade;
 	
@@ -33,18 +46,14 @@ public class UsuarioNote {
 		
 	}
 	
-	public UsuarioNote(long id, String nome, String email, String matricula, String grade) {
-		super();
-		this.id = id;
+	public UsuarioNote( String nome, String email, String anoIngresso, String matricula, String grade) {
 		this.nome = nome;
 		this.email = email;
 		this.matricula = matricula;
+		this.anoIngresso = anoIngresso;
 		this.grade = grade;
 	}
 
-	public Long getId(){
-		return id;
-	}
 	
 	public String getNome() {
 		return nome;
@@ -77,6 +86,15 @@ public class UsuarioNote {
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
+	
+	public String getAnoIngresso() {
+		return anoIngresso;
+	}
+
+	public void setAnoIngresso(String anoIngresso) {
+		this.anoIngresso = anoIngresso;
+	}
+
 
 	
 }

@@ -17,19 +17,15 @@ public class DisciplinaNote implements Serializable {
 	private static final long serialVersionUID = 1l;
 	
 	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@Column(name = "codigo")
+	@NotNull(message = "O codigo não pode ser nulo.")
+	@NotEmpty(message = "O codigo não pode ser vazio.")
+	private String codigo;
 	
 	@Column(name = "nome")
 	@NotNull(message = "O nome não pode ser nulo.")
 	@NotEmpty(message = "O nome não pode ser vazio.")
 	private String nome;
-	
-	@Column(name = "codigo")
-	@NotNull(message = "O codigo não pode ser nulo.")
-	@NotEmpty(message = "O codigo não pode ser vazio.")
-	private String codigo;
 	
 	@Column(name = "periodo")
 	@NotNull(message = "O periodo não pode ser nulo.")
@@ -73,10 +69,6 @@ public class DisciplinaNote implements Serializable {
 
 	public String getCodigo() {
 		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
 	}
 
 	public int getPeriodo() {

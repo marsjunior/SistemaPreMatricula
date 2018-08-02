@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "disciplinaAlocada")
@@ -17,16 +19,28 @@ public class DisciplinaAlocadaNote {
 	private long id;
 	
 	@Column(name = "codigoDisciplina")
+	@NotNull(message = "O codigo não pode ser nulo.")
+	@NotEmpty(message = "O codigo não pode ser vazio.")
 	private String codigoDisciplina;
 	
-	@Column(name = "emailAluno")
-	private String emailAluno;
+	@Column(name = "matricula")
+	@NotNull(message = "A matricula não pode ser nula.")
+	@NotEmpty(message = "A matricula não pode ser vazia.")
+	private String matricula;
 
-	public DisciplinaAlocadaNote(long id, String codigoDisciplina, String emailAluno) {
+	public DisciplinaAlocadaNote(long id, String codigoDisciplina, String matricula) {
 		super();
 		this.id = id;
 		this.codigoDisciplina = codigoDisciplina;
-		this.emailAluno = emailAluno;
+		this.matricula = matricula;
+	}
+	
+	public DisciplinaAlocadaNote(){
+		
+	}
+	
+	public Long getId(){
+		return id;
 	}
 
 	public String getCodigoDisciplina() {
@@ -37,12 +51,12 @@ public class DisciplinaAlocadaNote {
 		this.codigoDisciplina = codigoDisciplina;
 	}
 
-	public String getEmailAluno() {
-		return emailAluno;
+	public String getMatricula() {
+		return matricula;
 	}
 
-	public void setEmailAluno(String emailAluno) {
-		this.emailAluno = emailAluno;
+	public void setMatricula(String emailAluno) {
+		this.matricula = emailAluno;
 	}
 	
 	

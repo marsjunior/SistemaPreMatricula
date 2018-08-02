@@ -27,21 +27,15 @@ public class DisciplinaController {
 	public List<DisciplinaNote> getAll() {
 		return disciplinaService.getAll();
 	}
-	
-	@RequestMapping(value = "/disciplina/codigo", method = RequestMethod.POST)
-	public List<DisciplinaNote> getDisciplinaCodigo(@RequestBody DisciplinaNote codigo) {
-		System.out.println(codigo.getCodigo());
-		return disciplinaService.getDisciplinaCodigo(codigo.getCodigo());
+
+	@RequestMapping(value = "/disciplina/{id}", method = RequestMethod.GET)
+	public DisciplinaNote getById(@PathVariable("id") String id) {
+		return disciplinaService.getById(id);
 	}
 
 	@RequestMapping(value = "/disciplina", method = RequestMethod.POST)
 	public DisciplinaNote save(@RequestBody DisciplinaNote disciplina) {
 		return disciplinaService.save(disciplina);
-	}
-
-	@RequestMapping(value = "/disciplina/{id}", method = RequestMethod.GET)
-	public DisciplinaNote getById(@PathVariable("id") String id) {
-		return disciplinaService.getById(id);
 	}
 
 	@RequestMapping(value = "/disciplina/{id}", method = RequestMethod.PUT)
@@ -55,5 +49,4 @@ public class DisciplinaController {
 		DisciplinaNote todo = disciplinaService.delete(id);
 		return new ResponseEntity<DisciplinaNote>(todo, HttpStatus.OK);
 	}
-	
 }
