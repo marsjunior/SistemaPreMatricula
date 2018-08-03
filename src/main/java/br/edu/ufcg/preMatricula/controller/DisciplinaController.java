@@ -31,12 +31,20 @@ public class DisciplinaController {
 	private UsuarioService usuarioService;
 
 	@RequestMapping(value = "/disciplina", method = RequestMethod.GET)
-	public List<DisciplinaNote> getAll() {
+	public List<DisciplinaNote> getAll(@RequestHeader(required = true, value = LoginController.TOKEN_ID) String token) {
+		UsuarioNote usuario = usuarioService.getByToken(token);
+		if(usuario.getNome() == null){
+			throw new NaoAutorizadoException("Voce não está autorizado");
+		}
 		return disciplinaService.getAll();
 	}
 
 	@RequestMapping(value = "/disciplina/{id}", method = RequestMethod.GET)
-	public DisciplinaNote getById(@PathVariable("id") String id) {
+	public DisciplinaNote getById(@PathVariable("id") String id, @RequestHeader(required = true, value = LoginController.TOKEN_ID) String token) {
+		UsuarioNote usuario = usuarioService.getByToken(token);
+		if(usuario.getNome() == null){
+			throw new NaoAutorizadoException("Voce não está autorizado");
+		}
 		return disciplinaService.getById(id);
 	}
 
@@ -62,7 +70,12 @@ public class DisciplinaController {
 	}
 
 	@RequestMapping(value = "/disciplina/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<DisciplinaNote> delete(@PathVariable("id") String id) {
+	public ResponseEntity<DisciplinaNote> delete(@PathVariable("id") String id, @RequestHeader(required = true, value = LoginController.TOKEN_ID) String token ) {
+		
+		UsuarioNote usuario = usuarioService.getByToken(token);
+		if(usuario == null || !usuario.isAdmin()){
+			throw new NaoAutorizadoException("Usuario Não Autorizado");
+		}
 		DisciplinaNote todo = disciplinaService.delete(id);
 		return new ResponseEntity<DisciplinaNote>(todo, HttpStatus.OK);
 	}
