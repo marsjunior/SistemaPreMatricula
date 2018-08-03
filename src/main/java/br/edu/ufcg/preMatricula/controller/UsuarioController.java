@@ -52,9 +52,10 @@ public class UsuarioController {
 			throw new NaoAutorizadoException("Email Invalido!");
 		}else if(usuario.getEmail().equals(COORDENADOR)){
 			usuario.setAdmin(true);
-		}else if(usuario.isAdmin()){
-			usuario.setAdmin(false);
 		}
+//		}else if(usuario.isAdmin()){
+//			usuario.setAdmin(false);
+//		}
 		usuario.setIdToken(token);
 		usuarioService.save(usuario);
 		return usuario;
