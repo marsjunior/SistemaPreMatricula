@@ -33,6 +33,16 @@ public class DisciplinaAlocadaController {
 		return disciplinaAlocada.getById(id);
 	}
 	
+	@RequestMapping(value = "/disciplinaAlocada/aluno/{matricula}", method = RequestMethod.GET)
+	public List<DisciplinaAlocadaNote> getByAluno(@PathVariable("matricula") String matricula) {
+		return disciplinaAlocada.getByMatricula(matricula);
+	}
+	
+	@RequestMapping(value = "/disciplinaAlocada/disciplina/{codigo}", method = RequestMethod.GET)
+	public List<DisciplinaAlocadaNote> getByDisciplina(@PathVariable("codigo") String codigo) {
+		return disciplinaAlocada.getByDisciplina(codigo);
+	}
+	
 	@RequestMapping(value = "/disciplinaAlocada", method = RequestMethod.POST)
 	public DisciplinaAlocadaNote save(@RequestBody DisciplinaAlocadaNote disciplina) {
 		return disciplinaAlocada.save(disciplina);

@@ -35,6 +35,14 @@ public class DisciplinaAlocadaService {
 		return todo;
 	}
 	
+	public List<DisciplinaAlocadaNote> getByDisciplina(String codigo){
+		return disciplinaAlocada.findCodigoDisciplina(codigo);
+	}
+	
+	public List<DisciplinaAlocadaNote> getByMatricula(String codigo){
+		return disciplinaAlocada.findMatricula(codigo);
+	}
+	
 	public DisciplinaAlocadaNote update(DisciplinaAlocadaNote disciplina, Long id) {
 		Optional<DisciplinaAlocadaNote> optDisciplina = disciplinaAlocada.findById(id);
 

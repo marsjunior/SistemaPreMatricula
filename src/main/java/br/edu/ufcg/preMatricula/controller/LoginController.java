@@ -22,11 +22,13 @@ import com.google.gson.Gson;
 import br.edu.ufcg.preMatricula.model.LoginNote;
 import br.edu.ufcg.preMatricula.model.RequestNote;
 
-
+@RestController
 public class LoginController {
 	
-	public String login(LoginNote idTokenString) throws UnsupportedOperationException, IOException {
-		HttpGet get = new HttpGet("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+idTokenString.getIdTokenString());
+	public static final String TOKEN_ID = "Token-Autentication";
+	
+	public RequestNote login(String idTokenString) throws UnsupportedOperationException, IOException {
+		HttpGet get = new HttpGet("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+idTokenString);
 		CloseableHttpClient client = HttpClients.custom().build();
 
 		HttpResponse response = client.execute(get);
@@ -38,8 +40,7 @@ public class LoginController {
 		String statusPhrase = response.getStatusLine().getReasonPhrase();
 
 		response.getEntity().getContent().close();
-		System.out.println(request.getEmail());
-		return request.getExp();		
+		return request;		
 	}
 		
 }

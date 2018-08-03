@@ -42,19 +42,40 @@ public class UsuarioNote implements Serializable{
 	@Column(name = "grade")
 	private String grade;
 	
+	@Column(name = "admin")
+	private boolean admin;
+	
+	@NotNull(message = "A idToken não pode ser nulo.")
+	@NotEmpty(message = "A idToken não pode ser vazio.")
+	@Column(name = "idToken", length = 1500)
+	private String idToken;
+	
 	public UsuarioNote(){
 		
 	}
 	
-	public UsuarioNote( String nome, String email, String anoIngresso, String matricula, String grade) {
+	public UsuarioNote( String nome, String email, String anoIngresso, String matricula, String grade, boolean admin,String idToken) {
 		this.nome = nome;
 		this.email = email;
 		this.matricula = matricula;
 		this.anoIngresso = anoIngresso;
 		this.grade = grade;
+		this.admin = admin;
+		this.idToken = idToken;
 	}
 
-	
+	public void setIdToken(String idToken) {
+		this.idToken = idToken;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
 	public String getNome() {
 		return nome;
 	}

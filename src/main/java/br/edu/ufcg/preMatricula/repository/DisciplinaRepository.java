@@ -16,6 +16,4 @@ import br.edu.ufcg.preMatricula.model.DisciplinaNote;
 @Transactional
 public interface DisciplinaRepository extends JpaRepository<DisciplinaNote, String> {
 	
-	@Query("select u from DisciplinaNote u where u.codigo = ?1")
-	List<DisciplinaNote> findCodigoDisciplina(String codigo);
 }

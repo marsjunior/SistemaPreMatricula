@@ -24,7 +24,14 @@ public class UsuarioService {
 	public List<UsuarioNote> getUsers() {
 		return this.usuarioRepository.findAll();
 	}
-
+	
+	public UsuarioNote getByToken(String token){
+		Optional<UsuarioNote> optTodo = this.usuarioRepository.findByToken(token);
+		if (!optTodo.isPresent()) {
+			throw new RegisterNotFoundException("Token não cadastrado");
+		}
+		return optTodo.get();
+	}
 	public UsuarioNote save(UsuarioNote usuario) {
 		this.usuarioRepository.save(usuario);
 		return usuario;
@@ -37,6 +44,24 @@ public class UsuarioService {
 		}
 		UsuarioNote todo = optTodo.get();
 		return todo;
+	}
+	
+	public UsuarioNote update(UsuarioNote usuario, String matricula) {
+		Optional<UsuarioNote> optUsuario = usuarioRepository.findById(matricula);
+
+		if (!optUsuario.isPresent()) {
+			throw new RegisterNotFoundException("Usuario não existe.");
+		}
+		UsuarioNote newUsuario = optUsuario.get();
+		newUsuario.setNome(usuario.getNome());
+		newUsuario.setEmail(usuario.getEmail());
+		newUsuario.setAdmin(usuario.isAdmin());
+		newUsuario.setGrade(usuario.getGrade());
+		newUsuario.setAnoIngresso(usuario.getAnoIngresso());
+
+		usuarioRepository.save(newUsuario);
+
+		return newUsuario;
 	}
 	
 	public UsuarioNote delete(String id) {
